@@ -113,7 +113,7 @@ export function TeamSettingsClient({
     <div className="space-y-6">
       {/* Invite */}
       {isAdmin && (
-        <div className="bg-white border rounded-xl p-5 space-y-4">
+        <div className="bg-card border rounded-xl p-5 space-y-4">
           <h2 className="font-semibold text-sm">Invite Team Member</h2>
           <div className="flex gap-3 flex-wrap">
             <div className="flex-1 min-w-48">
@@ -138,7 +138,7 @@ export function TeamSettingsClient({
               </SelectContent>
             </Select>
             <Button
-              className="bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white gap-1.5"
+              className="bg-primary hover:bg-primary/80 text-primary-foreground gap-1.5"
               onClick={handleInvite}
               disabled={inviting || !inviteEmail}
             >
@@ -150,7 +150,7 @@ export function TeamSettingsClient({
       )}
 
       {/* Members list */}
-      <div className="bg-white border rounded-xl overflow-hidden">
+      <div className="bg-card border rounded-xl overflow-hidden">
         <div className="px-5 py-3 border-b">
           <h2 className="font-semibold text-sm">Team Members ({members.length})</h2>
         </div>
@@ -162,7 +162,7 @@ export function TeamSettingsClient({
             return (
               <div key={member.id} className="flex items-center gap-3 px-5 py-3">
                 <Avatar className="w-9 h-9 flex-shrink-0">
-                  <AvatarFallback className="bg-[#0F1E3C] text-white text-xs font-bold">
+                  <AvatarFallback className="bg-primary text-primary-foreground text-xs font-bold">
                     {getInitials(member.name)}
                   </AvatarFallback>
                 </Avatar>
@@ -194,7 +194,7 @@ export function TeamSettingsClient({
                     </Select>
                   ) : (
                     <span
-                      className={`text-xs px-2 py-0.5 rounded-full font-medium ${ROLE_COLORS[member.role] ?? "bg-gray-100 text-gray-700"}`}
+                      className={`text-xs px-2 py-0.5 rounded-full font-medium ${ROLE_COLORS[member.role] ?? "bg-secondary text-secondary-foreground"}`}
                     >
                       {member.role}
                     </span>

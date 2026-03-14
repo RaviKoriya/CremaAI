@@ -21,10 +21,10 @@ export default async function AppLayout({
     redirect("/login");
   }
 
-  // Fetch profile
+  // Fetch profile + company currency in one query
   const { data: profile } = await supabase
     .from("profiles")
-    .select("*")
+    .select("*, companies(currency)")
     .eq("id", user.id)
     .single();
 
@@ -35,8 +35,11 @@ export default async function AppLayout({
     redirect("/onboarding/company");
   }
 
+  const companyCurrency =
+    (profile.companies as unknown as { currency?: string } | null)?.currency ?? "USD";
+
   return (
-    <AppShell profile={profile}>
+    <AppShell profile={profile} companyCurrency={companyCurrency}>
       {children}
       <AriaButton />
     </AppShell>

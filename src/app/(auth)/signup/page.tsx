@@ -101,7 +101,7 @@ export default function SignupPage() {
 
           <Button
             type="submit"
-            className="w-full h-11 bg-[#00C9A7] hover:bg-[#00b396] text-white font-semibold"
+            className="w-full h-11 bg-accent hover:bg-accent/80 text-white font-semibold"
             disabled={loading}
           >
             {loading ? "Creating account..." : "Create free account →"}
@@ -109,13 +109,13 @@ export default function SignupPage() {
 
           <p className="text-xs text-center text-muted-foreground">
             By signing up, you agree to our{" "}
-            <span className="text-[#00C9A7]">Terms of Service</span>
+            <span className="text-accent">Terms of Service</span>
           </p>
         </form>
 
         <div className="mt-4 text-center text-sm text-muted-foreground">
           Already have an account?{" "}
-          <Link href="/login" className="text-[#00C9A7] hover:underline font-medium">
+          <Link href="/login" className="text-accent hover:underline font-medium">
             Sign in
           </Link>
         </div>

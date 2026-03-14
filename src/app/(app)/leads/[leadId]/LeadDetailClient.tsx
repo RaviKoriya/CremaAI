@@ -81,26 +81,26 @@ export function LeadDetailClient({
   }
 
   return (
-    <div className="min-h-full bg-gray-50">
+    <div className="min-h-full bg-muted/30">
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-20">
+      <div className="bg-card border-b sticky top-0 z-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-start gap-3">
             <button
               onClick={() => router.back()}
-              className="mt-1 text-muted-foreground hover:text-gray-900"
+              className="mt-1 text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
 
             <div className="flex-1 min-w-0">
-              <h1 className="font-bold text-lg text-gray-900 leading-tight truncate">
+              <h1 className="font-bold text-lg text-foreground leading-tight truncate">
                 {lead.title as string}
               </h1>
               <div className="flex items-center gap-2 mt-1 flex-wrap">
                 <StatusBadge status={lead.status as string} />
                 <PriorityBadge priority={lead.priority as string} />
-                <span className="font-bold text-[#0F1E3C]">
+                <span className="font-bold text-primary">
                   {formatCurrency(lead.value as number, lead.currency as string)}
                 </span>
               </div>
@@ -160,13 +160,13 @@ export function LeadDetailClient({
           <TabsContent value="overview">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Contact info */}
-              <div className="bg-white rounded-xl p-4 border space-y-3">
-                <h3 className="font-semibold text-sm text-gray-900">Contact</h3>
+              <div className="bg-card rounded-xl p-4 border space-y-3">
+                <h3 className="font-semibold text-sm text-foreground">Contact</h3>
                 {contact ? (
                   <div className="space-y-2">
                     <Link
                       href={`/contacts/${contact.id}`}
-                      className="font-medium text-[#0F1E3C] hover:text-[#00C9A7]"
+                      className="font-medium text-primary hover:text-accent"
                     >
                       {contact.full_name}
                     </Link>
@@ -175,13 +175,13 @@ export function LeadDetailClient({
                     )}
                     <div className="space-y-1.5 pt-1">
                       {contact.email && (
-                        <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-gray-900">
+                        <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
                           <Mail className="w-3.5 h-3.5" />
                           {contact.email}
                         </a>
                       )}
                       {contact.phone && (
-                        <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-gray-900">
+                        <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
                           <Phone className="w-3.5 h-3.5" />
                           {contact.phone}
                         </a>
@@ -193,8 +193,8 @@ export function LeadDetailClient({
                 )}
               </div>
 
-              <div className="bg-white rounded-xl p-4 border space-y-3">
-                <h3 className="font-semibold text-sm text-gray-900">Details</h3>
+              <div className="bg-card rounded-xl p-4 border space-y-3">
+                <h3 className="font-semibold text-sm text-foreground">Details</h3>
                 <dl className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <dt className="text-muted-foreground">Source</dt>
@@ -227,9 +227,9 @@ export function LeadDetailClient({
 
               {/* Notes */}
               {!!lead.notes && (
-                <div className="bg-white rounded-xl p-4 border sm:col-span-2">
-                  <h3 className="font-semibold text-sm text-gray-900 mb-2">Notes</h3>
-                  <p className="text-sm text-gray-700 whitespace-pre-wrap">{lead.notes as string}</p>
+                <div className="bg-card rounded-xl p-4 border sm:col-span-2">
+                  <h3 className="font-semibold text-sm text-foreground mb-2">Notes</h3>
+                  <p className="text-sm text-muted-foreground whitespace-pre-wrap">{lead.notes as string}</p>
                 </div>
               )}
 
@@ -278,7 +278,7 @@ export function LeadDetailClient({
             <div className="space-y-4">
               <div className="flex justify-end">
                 <Link href={`/invoices/new?leadId=${lead.id}`}>
-                  <Button size="sm" className="bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white gap-1.5">
+                  <Button size="sm" className="bg-primary hover:bg-primary/80 text-primary-foreground gap-1.5">
                     <Plus className="w-4 h-4" />
                     Create Invoice
                   </Button>
@@ -286,14 +286,14 @@ export function LeadDetailClient({
               </div>
               {invoices.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground">
-                  <FileText className="w-10 h-10 mx-auto mb-3 text-gray-300" />
+                  <FileText className="w-10 h-10 mx-auto mb-3 text-muted-foreground" />
                   <p className="text-sm">No invoices linked to this lead</p>
                 </div>
               ) : (
                 <div className="space-y-2">
                   {invoices.map((inv) => (
                     <Link key={inv.id} href={`/invoices/${inv.id}`}>
-                      <div className="bg-white border rounded-xl p-4 flex items-center justify-between hover:bg-gray-50">
+                      <div className="bg-card border rounded-xl p-4 flex items-center justify-between hover:bg-muted/50">
                         <div>
                           <p className="font-medium text-sm">{inv.invoice_number}</p>
                           <p className="text-xs text-muted-foreground mt-0.5">

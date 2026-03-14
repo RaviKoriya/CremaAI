@@ -169,13 +169,13 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
   const lineItems = invoice.line_items ?? [];
 
   return (
-    <div className="min-h-full bg-gray-50">
+    <div className="min-h-full bg-muted/30">
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-20">
+      <div className="bg-card border-b sticky top-0 z-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
           <button
             onClick={() => router.back()}
-            className="text-muted-foreground hover:text-gray-900"
+            className="text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -184,7 +184,7 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
             <h1 className="font-bold text-lg truncate">{invoice.invoice_number}</h1>
             <div className="flex items-center gap-2 mt-0.5">
               <StatusBadge status={invoice.status} type="invoice" />
-              <span className="text-sm font-bold text-[#0F1E3C]">
+              <span className="text-sm font-bold text-primary">
                 {formatCurrency(invoice.total, invoice.currency)}
               </span>
             </div>
@@ -214,13 +214,13 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 space-y-4">
         {/* Invoice header card */}
-        <div className="bg-white border rounded-xl p-5">
+        <div className="bg-card border rounded-xl p-5">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">
                 From
               </p>
-              <p className="font-bold text-[#0F1E3C]">{company.name}</p>
+              <p className="font-bold text-foreground">{company.name}</p>
             </div>
             <div className="text-right">
               <p className="text-xs text-muted-foreground">Issue Date</p>
@@ -246,7 +246,7 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
               )}
               <Link
                 href={`/contacts/${invoice.contacts.id}`}
-                className="text-xs text-[#00C9A7] hover:underline mt-1 inline-flex items-center gap-0.5"
+                className="text-xs text-accent hover:underline mt-1 inline-flex items-center gap-0.5"
               >
                 View contact <ExternalLink className="w-3 h-3" />
               </Link>
@@ -257,7 +257,7 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
             <div className="mt-3">
               <p className="text-xs text-muted-foreground">
                 Linked to:{" "}
-                <Link href={`/leads/${invoice.leads.id}`} className="text-[#00C9A7] hover:underline">
+                <Link href={`/leads/${invoice.leads.id}`} className="text-accent hover:underline">
                   {invoice.leads.title}
                 </Link>
               </p>
@@ -266,14 +266,14 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
         </div>
 
         {/* Line Items */}
-        <div className="bg-white border rounded-xl overflow-hidden">
+        <div className="bg-card border rounded-xl overflow-hidden">
           <div className="px-5 py-3 border-b">
             <h2 className="font-semibold text-sm">Line Items</h2>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="bg-gray-50 text-xs text-muted-foreground">
+                <tr className="bg-muted text-xs text-muted-foreground">
                   <th className="text-left px-5 py-2 font-medium">Description</th>
                   <th className="text-right px-5 py-2 font-medium">Qty</th>
                   <th className="text-right px-5 py-2 font-medium">Unit Price</th>
@@ -309,7 +309,7 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
             </div>
             <div className="flex justify-between font-bold text-base border-t pt-2">
               <span>Total</span>
-              <span className="text-[#0F1E3C]">
+              <span className="text-foreground">
                 {formatCurrency(invoice.total, invoice.currency)}
               </span>
             </div>
@@ -320,17 +320,17 @@ export function InvoiceDetailClient({ invoice: initialInvoice, company, userRole
         {(invoice.notes || invoice.bank_details?.info) && (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {invoice.notes && (
-              <div className="bg-white border rounded-xl p-4">
+              <div className="bg-card border rounded-xl p-4">
                 <h3 className="font-semibold text-xs text-muted-foreground uppercase mb-2">Notes</h3>
-                <p className="text-sm whitespace-pre-wrap text-gray-700">{invoice.notes}</p>
+                <p className="text-sm whitespace-pre-wrap text-muted-foreground">{invoice.notes}</p>
               </div>
             )}
             {invoice.bank_details?.info && (
-              <div className="bg-white border rounded-xl p-4">
+              <div className="bg-card border rounded-xl p-4">
                 <h3 className="font-semibold text-xs text-muted-foreground uppercase mb-2">
                   Payment Details
                 </h3>
-                <pre className="text-xs font-mono text-gray-700 whitespace-pre-wrap">
+                <pre className="text-xs font-mono text-muted-foreground whitespace-pre-wrap">
                   {invoice.bank_details.info}
                 </pre>
               </div>

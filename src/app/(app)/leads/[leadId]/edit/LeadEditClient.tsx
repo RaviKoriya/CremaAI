@@ -15,12 +15,12 @@ export function LeadEditClient({ lead, companyId, returnHref }: LeadEditClientPr
   const router = useRouter();
 
   return (
-    <div className="min-h-full bg-gray-50">
-      <div className="bg-white border-b sticky top-0 z-20">
+    <div className="min-h-full bg-muted/30">
+      <div className="bg-card border-b sticky top-0 z-20">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
           <button
             onClick={() => router.back()}
-            className="text-muted-foreground hover:text-gray-900"
+            className="text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
@@ -29,7 +29,7 @@ export function LeadEditClient({ lead, companyId, returnHref }: LeadEditClientPr
       </div>
 
       <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6">
-        <div className="bg-white border rounded-xl p-5">
+        <div className="bg-card border rounded-xl p-5">
           <LeadForm
             lead={lead}
             companyId={companyId}

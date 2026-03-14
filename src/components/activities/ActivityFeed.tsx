@@ -12,7 +12,7 @@ const ACTIVITY_ICONS = {
   Call: { icon: Phone, color: "bg-blue-100 text-blue-600" },
   Email: { icon: Mail, color: "bg-purple-100 text-purple-600" },
   Meeting: { icon: Calendar, color: "bg-teal-100 text-teal-600" },
-  Note: { icon: FileText, color: "bg-gray-100 text-gray-600" },
+  Note: { icon: FileText, color: "bg-muted text-muted-foreground" },
   Task: { icon: CheckSquare, color: "bg-amber-100 text-amber-600" },
 };
 

@@ -93,11 +93,11 @@ export default function OnboardingFirstLeadPage() {
     return (
       <div className="space-y-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-[#0F1E3C] text-white flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
             3
           </div>
           <div>
-            <h2 className="font-bold text-xl text-gray-900">Add your first lead</h2>
+            <h2 className="font-bold text-xl text-foreground">Add your first lead</h2>
             <p className="text-sm text-muted-foreground">Choose how you&apos;d like to get started</p>
           </div>
         </div>
@@ -105,14 +105,14 @@ export default function OnboardingFirstLeadPage() {
         <div className="grid gap-4">
           <button
             onClick={() => setMode("manual")}
-            className="text-left p-5 rounded-xl border-2 border-dashed border-gray-200 hover:border-[#00C9A7] hover:bg-teal-50/50 transition-colors group"
+            className="text-left p-5 rounded-xl border-2 border-dashed border-border hover:border-accent hover:bg-accent/5 transition-colors group"
           >
             <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-[#0F1E3C] text-white flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
                 <Target className="w-5 h-5" />
               </div>
               <div>
-                <div className="font-semibold text-gray-900 group-hover:text-[#0F1E3C]">
+                <div className="font-semibold text-foreground group-hover:text-primary">
                   Add manually
                 </div>
                 <div className="text-sm text-muted-foreground mt-0.5">
@@ -124,14 +124,14 @@ export default function OnboardingFirstLeadPage() {
 
           <button
             onClick={() => setMode("csv")}
-            className="text-left p-5 rounded-xl border-2 border-dashed border-gray-200 hover:border-[#00C9A7] hover:bg-teal-50/50 transition-colors group"
+            className="text-left p-5 rounded-xl border-2 border-dashed border-border hover:border-accent hover:bg-accent/5 transition-colors group"
           >
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-lg bg-purple-600 text-white flex items-center justify-center flex-shrink-0">
                 <Upload className="w-5 h-5" />
               </div>
               <div>
-                <div className="font-semibold text-gray-900 group-hover:text-[#0F1E3C]">
+                <div className="font-semibold text-foreground group-hover:text-primary">
                   Import from CSV
                 </div>
                 <div className="text-sm text-muted-foreground mt-0.5">
@@ -143,14 +143,14 @@ export default function OnboardingFirstLeadPage() {
 
           <button
             onClick={handleSkip}
-            className="text-left p-5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors"
+            className="text-left p-5 rounded-xl border border-border hover:bg-muted/50 transition-colors"
           >
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
-                <ArrowRight className="w-5 h-5 text-gray-400" />
+              <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                <ArrowRight className="w-5 h-5 text-muted-foreground" />
               </div>
               <div>
-                <div className="font-semibold text-gray-900">Skip for now</div>
+                <div className="font-semibold text-foreground">Skip for now</div>
                 <div className="text-sm text-muted-foreground mt-0.5">
                   I&apos;ll explore the app first
                 </div>
@@ -168,7 +168,7 @@ export default function OnboardingFirstLeadPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMode(null)}
-            className="text-sm text-muted-foreground hover:text-gray-900"
+            className="text-sm text-muted-foreground hover:text-foreground"
           >
             ← Back
           </button>
@@ -183,7 +183,7 @@ export default function OnboardingFirstLeadPage() {
           <CardContent>
             <Button
               onClick={handleSkip}
-              className="w-full h-11 bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+              className="w-full h-11 bg-primary hover:bg-primary/80 text-primary-foreground"
             >
               Go to Dashboard & Import later →
             </Button>
@@ -198,18 +198,18 @@ export default function OnboardingFirstLeadPage() {
       <div className="flex items-center gap-3">
         <button
           onClick={() => setMode(null)}
-          className="text-sm text-muted-foreground hover:text-gray-900"
+          className="text-sm text-muted-foreground hover:text-foreground"
         >
           ← Back
         </button>
       </div>
 
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-[#0F1E3C] text-white flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
           3
         </div>
         <div>
-          <h2 className="font-bold text-xl text-gray-900">Add your first lead</h2>
+          <h2 className="font-bold text-xl text-foreground">Add your first lead</h2>
           <p className="text-sm text-muted-foreground">Just 5 fields to get started</p>
         </div>
       </div>
@@ -296,7 +296,7 @@ export default function OnboardingFirstLeadPage() {
             <div className="pt-2 space-y-3">
               <Button
                 type="submit"
-                className="w-full h-11 bg-[#00C9A7] hover:bg-[#00b396] text-white font-semibold"
+                className="w-full h-11 bg-accent hover:bg-accent/80 text-white font-semibold"
                 disabled={loading}
               >
                 {loading ? "Saving..." : "Add lead & go to dashboard 🎉"}

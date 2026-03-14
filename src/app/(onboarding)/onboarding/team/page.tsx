@@ -51,11 +51,11 @@ export default function OnboardingTeamPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-[#0F1E3C] text-white flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
           2
         </div>
         <div>
-          <h2 className="font-bold text-xl text-gray-900">Invite your team</h2>
+          <h2 className="font-bold text-xl text-foreground">Invite your team</h2>
           <p className="text-sm text-muted-foreground">Optional — you can always do this later</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ export default function OnboardingTeamPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <Users className="w-5 h-5 text-[#00C9A7]" />
+            <Users className="w-5 h-5 text-accent" />
             Team Members
           </CardTitle>
           <CardDescription>
@@ -115,7 +115,7 @@ export default function OnboardingTeamPage() {
               variant="outline"
               size="sm"
               onClick={addRow}
-              className="text-[#00C9A7] border-[#00C9A7]"
+              className="text-accent border-accent"
             >
               <Plus className="w-4 h-4 mr-1" />
               Add another
@@ -124,7 +124,7 @@ export default function OnboardingTeamPage() {
             <div className="pt-2 space-y-3">
               <Button
                 type="submit"
-                className="w-full h-11 bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+                className="w-full h-11 bg-primary hover:bg-primary/80 text-primary-foreground"
               >
                 Send invites & continue →
               </Button>

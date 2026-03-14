@@ -22,9 +22,7 @@ export function KanbanColumn({ status, label, color, leads, onStatusChange }: Ka
   const currency = leads[0]?.currency ?? "USD";
 
   return (
-    <div
-      className="kanban-column-snap flex-shrink-0 w-[280px] sm:w-[300px]"
-    >
+    <div className="min-w-0">
       {/* Column header */}
       <div className="flex items-center justify-between px-1 mb-3">
         <div className="flex items-center gap-2">
@@ -32,8 +30,8 @@ export function KanbanColumn({ status, label, color, leads, onStatusChange }: Ka
             className="w-2.5 h-2.5 rounded-full flex-shrink-0"
             style={{ backgroundColor: color }}
           />
-          <span className="font-semibold text-sm text-gray-800">{label}</span>
-          <span className="text-xs bg-gray-100 text-gray-500 rounded-full px-1.5 py-0.5 font-medium">
+          <span className="font-semibold text-sm text-foreground">{label}</span>
+          <span className="text-xs bg-muted text-muted-foreground rounded-full px-1.5 py-0.5 font-medium">
             {leads.length}
           </span>
         </div>
@@ -49,7 +47,7 @@ export function KanbanColumn({ status, label, color, leads, onStatusChange }: Ka
         ref={setNodeRef}
         className={cn(
           "min-h-[200px] space-y-2 rounded-xl p-2 transition-colors",
-          isOver ? "bg-blue-50 border-2 border-dashed border-blue-300" : "bg-gray-50/80"
+          isOver ? "bg-blue-50 dark:bg-blue-950/30 border-2 border-dashed border-blue-300" : "bg-muted/50"
         )}
       >
         <SortableContext

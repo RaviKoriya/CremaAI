@@ -24,7 +24,16 @@ export default async function DashboardPage() {
   const companyId = profile.company_id;
 
   // Parallel data fetching
-  const [statsResult, funnelResult, activitiesResult, topLeadsResult] = await Promise.all([
+  const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const [
+    statsResult,
+    funnelResult,
+    activitiesResult,
+    topLeadsResult,
+    contactsCountResult,
+    pendingInvoicesResult,
+    activitiesWeekResult,
+  ] = await Promise.all([
     supabase.rpc("get_dashboard_stats", { p_company_id: companyId }),
     supabase.rpc("get_pipeline_funnel", { p_company_id: companyId }),
     supabase
@@ -48,9 +57,33 @@ export default async function DashboardPage() {
       .not("status", "in", '("Won","Lost")')
       .order("value", { ascending: false })
       .limit(5),
+    supabase
+      .from("contacts")
+      .select("id", { count: "exact", head: true })
+      .eq("company_id", companyId),
+    supabase
+      .from("invoices")
+      .select("id", { count: "exact", head: true })
+      .eq("company_id", companyId)
+      .in("status", ["Sent", "Overdue"]),
+    supabase
+      .from("activities")
+      .select("id", { count: "exact", head: true })
+      .eq("company_id", companyId)
+      .gte("created_at", sevenDaysAgo),
   ]);
 
-  const stats = (statsResult.data ?? {}) as Record<string, number>;
+  const raw = (statsResult.data ?? {}) as Record<string, number>;
+  const stats = {
+    total_leads:         raw.total_leads ?? 0,
+    active_leads:        raw.open_leads ?? 0,
+    total_pipeline_value: raw.pipeline_value ?? 0,
+    revenue_this_month:  raw.won_value_month ?? 0,
+    overdue_invoices:    raw.overdue_invoices ?? 0,
+    total_contacts:      contactsCountResult.count ?? 0,
+    pending_invoices:    pendingInvoicesResult.count ?? 0,
+    activities_this_week: activitiesWeekResult.count ?? 0,
+  };
   const funnel = (funnelResult.data ?? []) as { status: string; lead_count: number; total_value: number }[];
   const activities = activitiesResult.data ?? [];
   const topLeads = topLeadsResult.data ?? [];

@@ -29,7 +29,7 @@ export function EmptyState({ title, description, icon, action, className }: Empt
             height="80"
             viewBox="0 0 80 80"
             fill="none"
-            className="text-gray-200"
+            className="text-muted-foreground/30"
           >
             <circle cx="40" cy="40" r="40" fill="currentColor" />
             <path
@@ -41,14 +41,14 @@ export function EmptyState({ title, description, icon, action, className }: Empt
           </svg>
         </div>
       )}
-      <h3 className="font-semibold text-gray-900 mb-1">{title}</h3>
+      <h3 className="font-semibold text-foreground mb-1">{title}</h3>
       {description && (
         <p className="text-sm text-muted-foreground mb-6 max-w-xs">{description}</p>
       )}
       {action && (
         <Button
           onClick={action.onClick}
-          className="bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+          className="bg-primary hover:bg-primary/80 text-white"
         >
           {action.label}
         </Button>

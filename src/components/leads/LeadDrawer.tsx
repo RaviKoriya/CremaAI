@@ -3,8 +3,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
 } from "@/components/ui/sheet";
 import { LeadForm } from "./LeadForm";
 import type { Lead } from "@/types/database";
@@ -26,21 +24,16 @@ export function LeadDrawer({
 }: LeadDrawerProps) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-        <SheetHeader>
-          <SheetTitle>{lead ? "Edit Lead" : "New Lead"}</SheetTitle>
-        </SheetHeader>
-        <div className="mt-4">
-          <LeadForm
-            lead={lead}
-            companyId={companyId}
-            onSuccess={(l) => {
-              onSuccess?.(l);
-              onOpenChange(false);
-            }}
-            onCancel={() => onOpenChange(false)}
-          />
-        </div>
+      <SheetContent className="w-full sm:max-w-2xl p-0 flex flex-col overflow-hidden">
+        <LeadForm
+          lead={lead}
+          companyId={companyId}
+          onSuccess={(l) => {
+            onSuccess?.(l);
+            onOpenChange(false);
+          }}
+          onCancel={() => onOpenChange(false)}
+        />
       </SheetContent>
     </Sheet>
   );

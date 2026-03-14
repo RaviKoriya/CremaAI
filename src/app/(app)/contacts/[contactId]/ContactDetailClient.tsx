@@ -63,16 +63,16 @@ export function ContactDetailClient({
   const canDelete = userRole === "Admin" || userRole === "Manager";
 
   return (
-    <div className="min-h-full bg-gray-50">
+    <div className="min-h-full bg-muted/30">
       {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-20">
+      <div className="bg-card border-b sticky top-0 z-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
-          <button onClick={() => router.back()} className="text-muted-foreground hover:text-gray-900">
+          <button onClick={() => router.back()} className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="w-5 h-5" />
           </button>
 
           <Avatar className="w-10 h-10">
-            <AvatarFallback className="bg-[#0F1E3C] text-white font-bold">
+            <AvatarFallback className="bg-primary text-primary-foreground font-bold">
               {getInitials(contact.full_name)}
             </AvatarFallback>
           </Avatar>
@@ -114,17 +114,17 @@ export function ContactDetailClient({
 
           <TabsContent value="overview">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white border rounded-xl p-4 space-y-3">
+              <div className="bg-card border rounded-xl p-4 space-y-3">
                 <h3 className="font-semibold text-sm">Contact Info</h3>
                 <div className="space-y-2">
                   {contact.email && (
-                    <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm hover:text-[#00C9A7]">
+                    <a href={`mailto:${contact.email}`} className="flex items-center gap-2 text-sm hover:text-accent">
                       <Mail className="w-4 h-4 text-muted-foreground" />
                       {contact.email}
                     </a>
                   )}
                   {contact.phone && (
-                    <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm hover:text-[#00C9A7]">
+                    <a href={`tel:${contact.phone}`} className="flex items-center gap-2 text-sm hover:text-accent">
                       <Phone className="w-4 h-4 text-muted-foreground" />
                       {contact.phone}
                     </a>
@@ -153,7 +153,7 @@ export function ContactDetailClient({
                 )}
               </div>
 
-              <div className="bg-white border rounded-xl p-4 space-y-2">
+              <div className="bg-card border rounded-xl p-4 space-y-2">
                 <h3 className="font-semibold text-sm">Quick Stats</h3>
                 <dl className="space-y-2 text-sm">
                   <div className="flex justify-between">
@@ -178,7 +178,7 @@ export function ContactDetailClient({
               <div className="space-y-2">
                 {leads.map((lead) => (
                   <Link key={lead.id} href={`/leads/${lead.id}`}>
-                    <div className="bg-white border rounded-xl p-4 flex items-center justify-between hover:bg-gray-50">
+                    <div className="bg-card border rounded-xl p-4 flex items-center justify-between hover:bg-muted/50">
                       <div>
                         <p className="font-medium text-sm">{lead.title}</p>
                       </div>
@@ -214,10 +214,8 @@ export function ContactDetailClient({
 
       {/* Edit dialog */}
       <Dialog open={editOpen} onOpenChange={setEditOpen}>
-        <DialogContent className="max-w-lg">
-          <DialogHeader>
-            <DialogTitle>Edit Contact</DialogTitle>
-          </DialogHeader>
+        <DialogContent className="max-w-2xl p-0 flex flex-col overflow-hidden max-h-[90vh]">
+          <DialogTitle className="sr-only">Edit Contact</DialogTitle>
           <ContactForm
             contact={contact}
             companyId={companyId}

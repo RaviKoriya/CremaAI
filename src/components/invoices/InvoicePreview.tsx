@@ -40,16 +40,16 @@ export function InvoicePreview({
   gstin,
 }: InvoicePreviewProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 text-sm space-y-6 min-h-[600px]">
+    <div className="bg-card rounded-xl shadow-sm p-6 text-sm space-y-6 min-h-[600px]">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <div className="w-10 h-10 rounded-lg bg-[#0F1E3C] flex items-center justify-center mb-3">
+          <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center mb-3">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zm-10 10h8v8H3v-8zm13 4a4 4 0 100-8 4 4 0 000 8z" fill="white" />
             </svg>
           </div>
-          <h2 className="font-bold text-xl text-[#0F1E3C]">INVOICE</h2>
+          <h2 className="font-bold text-xl text-primary">INVOICE</h2>
           <p className="text-muted-foreground text-xs">{invoiceNumber}</p>
         </div>
         <div className="text-right text-xs space-y-0.5">
@@ -91,7 +91,7 @@ export function InvoicePreview({
       {/* Line Items */}
       <div className="border rounded-lg overflow-hidden">
         <table className="w-full text-xs">
-          <thead className="bg-gray-50">
+          <thead className="bg-muted">
             <tr className="text-muted-foreground">
               <th className="text-left px-3 py-2 font-medium">Description</th>
               <th className="text-right px-3 py-2 font-medium">Qty</th>
@@ -134,7 +134,7 @@ export function InvoicePreview({
         ))}
         <div className="flex justify-between font-bold text-base border-t pt-1.5 mt-1.5">
           <span>Total</span>
-          <span className="text-[#0F1E3C]">{formatCurrency(calculation.total, currency)}</span>
+          <span className="text-foreground">{formatCurrency(calculation.total, currency)}</span>
         </div>
       </div>
 
@@ -142,15 +142,15 @@ export function InvoicePreview({
       {notes && (
         <div className="border-t pt-4 text-xs">
           <p className="text-muted-foreground uppercase tracking-wide mb-1">Notes</p>
-          <p className="text-gray-700 whitespace-pre-wrap">{notes}</p>
+          <p className="text-muted-foreground whitespace-pre-wrap">{notes}</p>
         </div>
       )}
 
       {/* Bank Details */}
       {bankDetails && (
-        <div className="border-t pt-4 text-xs bg-gray-50 rounded-lg p-3">
+        <div className="border-t pt-4 text-xs bg-muted rounded-lg p-3">
           <p className="text-muted-foreground uppercase tracking-wide mb-1">Payment Details</p>
-          <p className="font-mono text-gray-700 whitespace-pre-wrap">{bankDetails}</p>
+          <p className="font-mono text-muted-foreground whitespace-pre-wrap">{bankDetails}</p>
         </div>
       )}
     </div>

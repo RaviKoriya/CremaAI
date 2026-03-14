@@ -64,8 +64,8 @@ function generateInvoiceHTML(invoice: Record<string, unknown>): string {
 <style>
   body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; color: #111; }
   .header { display: flex; justify-content: space-between; margin-bottom: 40px; }
-  .logo { width: 40px; height: 40px; background: #0F1E3C; border-radius: 8px; }
-  .invoice-title { font-size: 28px; font-weight: 800; color: #0F1E3C; }
+  .logo { width: 40px; height: 40px; background: #2463FF; border-radius: 8px; }
+  .invoice-title { font-size: 28px; font-weight: 800; color: #2463FF; }
   table { width: 100%; border-collapse: collapse; margin: 20px 0; }
   th { background: #f8fafc; text-align: left; padding: 8px 12px; font-size: 12px; color: #64748b; }
   td { padding: 8px 12px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
@@ -76,7 +76,7 @@ function generateInvoiceHTML(invoice: Record<string, unknown>): string {
 </style>
 </head>
 <body>
-<button onclick="window.print()" style="position:fixed;top:20px;right:20px;padding:8px 16px;background:#0F1E3C;color:white;border:none;border-radius:8px;cursor:pointer;">Print / Save PDF</button>
+<button onclick="window.print()" style="position:fixed;top:20px;right:20px;padding:8px 16px;background:#2463FF;color:white;border:none;border-radius:8px;cursor:pointer;">Print / Save PDF</button>
 <div class="header">
   <div>
     <div class="logo"></div>
@@ -127,7 +127,7 @@ ${contact ? `
     <span>Tax</span><span>${fmt(Number(invoice.tax_amount), invoice.currency as string)}</span>
   </div>
   <div style="display:flex;justify-content:space-between;padding:8px 0;font-weight:700;font-size:16px;border-top:2px solid #e2e8f0;margin-top:4px">
-    <span>Total</span><span style="color:#0F1E3C">${fmt(Number(invoice.total), invoice.currency as string)}</span>
+    <span>Total</span><span style="color:#2463FF">${fmt(Number(invoice.total), invoice.currency as string)}</span>
   </div>
 </div>
 

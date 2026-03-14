@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
+import { useCurrency } from "@/contexts/CurrencyContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,6 +32,7 @@ interface CompanySettingsClientProps {
 }
 
 export function CompanySettingsClient({ company, userRole }: CompanySettingsClientProps) {
+  const { setCurrency: setContextCurrency } = useCurrency();
   const [name, setName] = useState(company.name ?? "");
   const [country, setCountry] = useState(company.country ?? "US");
   const [currency, setCurrency] = useState(company.currency ?? "USD");
@@ -56,6 +58,7 @@ export function CompanySettingsClient({ company, userRole }: CompanySettingsClie
     if (error) {
       toast.error("Failed to save settings");
     } else {
+      setContextCurrency(currency);
       toast.success("Settings saved");
     }
   }
@@ -68,7 +71,7 @@ export function CompanySettingsClient({ company, userRole }: CompanySettingsClie
         </div>
       )}
 
-      <div className="bg-white border rounded-xl p-5 space-y-4">
+      <div className="bg-card border rounded-xl p-5 space-y-4">
         <h2 className="font-semibold text-sm">Company Profile</h2>
 
         <div className="space-y-2">
@@ -145,7 +148,7 @@ export function CompanySettingsClient({ company, userRole }: CompanySettingsClie
       {isAdmin && (
         <div className="flex justify-end">
           <Button
-            className="bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+            className="bg-primary hover:bg-primary/80 text-white"
             onClick={handleSave}
             disabled={saving}
           >

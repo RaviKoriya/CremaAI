@@ -20,11 +20,11 @@ export default async function OnboardingLayout({
   if (!user) redirect("/login");
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-[#0F1E3C] text-white py-4 px-6">
+      <header className="bg-primary text-primary-foreground py-4 px-6">
         <div className="max-w-2xl mx-auto flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#00C9A7] flex items-center justify-center flex-shrink-0">
+          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zm-10 10h8v8H3v-8zm13 4a4 4 0 100-8 4 4 0 000 8z" fill="white" />
             </svg>

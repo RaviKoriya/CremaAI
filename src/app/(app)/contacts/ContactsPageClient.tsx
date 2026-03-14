@@ -8,8 +8,6 @@ import { ContactCard } from "@/components/contacts/ContactCard";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
 } from "@/components/ui/sheet";
 import { ContactForm } from "@/components/contacts/ContactForm";
 import { EmptyState } from "@/components/shared/EmptyState";
@@ -43,9 +41,9 @@ export function ContactsPageClient({ initialContacts, companyId }: ContactsPageC
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 sm:px-6 py-4 gap-3 border-b bg-white flex-wrap">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-4 gap-3 border-b bg-card flex-wrap">
         <div>
-          <h1 className="font-bold text-lg text-gray-900">Contacts</h1>
+          <h1 className="font-bold text-lg text-foreground">Contacts</h1>
           <p className="text-xs text-muted-foreground">{contacts.length} total</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
@@ -58,16 +56,16 @@ export function ContactsPageClient({ initialContacts, companyId }: ContactsPageC
               className="pl-8 h-9 w-48"
             />
           </div>
-          <div className="hidden sm:flex rounded-lg border p-0.5 bg-gray-50">
+          <div className="hidden sm:flex rounded-lg border p-0.5 bg-muted/50">
             <button
               onClick={() => setView("grid")}
-              className={`p-1.5 rounded-md transition-colors ${view === "grid" ? "bg-white shadow-sm" : "text-muted-foreground"}`}
+              className={`p-1.5 rounded-md transition-colors ${view === "grid" ? "bg-card shadow-sm" : "text-muted-foreground"}`}
             >
               <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => setView("list")}
-              className={`p-1.5 rounded-md transition-colors ${view === "list" ? "bg-white shadow-sm" : "text-muted-foreground"}`}
+              className={`p-1.5 rounded-md transition-colors ${view === "list" ? "bg-card shadow-sm" : "text-muted-foreground"}`}
             >
               <List className="w-4 h-4" />
             </button>
@@ -80,7 +78,7 @@ export function ContactsPageClient({ initialContacts, companyId }: ContactsPageC
           </Link>
           <Button
             onClick={() => setDrawerOpen(true)}
-            className="bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white h-9 gap-1.5"
+            className="bg-primary hover:bg-primary/80 text-primary-foreground h-9 gap-1.5"
             size="sm"
           >
             <Plus className="w-4 h-4" />
@@ -113,10 +111,10 @@ export function ContactsPageClient({ initialContacts, companyId }: ContactsPageC
             ))}
           </div>
         ) : (
-          <div className="bg-white rounded-xl border overflow-hidden">
+          <div className="bg-card rounded-xl border overflow-hidden">
             <table className="w-full">
               <thead>
-                <tr className="border-b bg-gray-50 text-xs text-muted-foreground">
+                <tr className="border-b bg-muted text-xs text-muted-foreground">
                   <th className="text-left px-4 py-3 font-medium">Name</th>
                   <th className="text-left px-4 py-3 font-medium hidden sm:table-cell">Email</th>
                   <th className="text-left px-4 py-3 font-medium hidden md:table-cell">Company</th>
@@ -126,9 +124,9 @@ export function ContactsPageClient({ initialContacts, companyId }: ContactsPageC
               </thead>
               <tbody>
                 {filtered.map((contact) => (
-                  <tr key={contact.id} className="border-b last:border-0 hover:bg-gray-50 cursor-pointer">
+                  <tr key={contact.id} className="border-b last:border-0 hover:bg-muted/50 cursor-pointer">
                     <td className="px-4 py-3">
-                      <Link href={`/contacts/${contact.id}`} className="font-medium text-sm hover:text-[#00C9A7]">
+                      <Link href={`/contacts/${contact.id}`} className="font-medium text-sm hover:text-accent">
                         {contact.full_name}
                       </Link>
                     </td>
@@ -155,27 +153,22 @@ export function ContactsPageClient({ initialContacts, companyId }: ContactsPageC
       {/* FAB */}
       <button
         onClick={() => setDrawerOpen(true)}
-        className="md:hidden fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-[#0F1E3C] text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform"
+        className="md:hidden fixed bottom-20 right-4 z-40 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center active:scale-95 transition-transform"
       >
         <Plus className="w-6 h-6" />
       </button>
 
       {/* Drawer */}
       <Sheet open={drawerOpen} onOpenChange={setDrawerOpen}>
-        <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>New Contact</SheetTitle>
-          </SheetHeader>
-          <div className="mt-4">
-            <ContactForm
-              companyId={companyId}
-              onSuccess={(contact) => {
-                setContacts([{ ...contact, lead_count: 0 }, ...contacts]);
-                setDrawerOpen(false);
-              }}
-              onCancel={() => setDrawerOpen(false)}
-            />
-          </div>
+        <SheetContent className="w-full sm:max-w-2xl p-0 flex flex-col overflow-hidden">
+          <ContactForm
+            companyId={companyId}
+            onSuccess={(contact) => {
+              setContacts([{ ...contact, lead_count: 0 }, ...contacts]);
+              setDrawerOpen(false);
+            }}
+            onCancel={() => setDrawerOpen(false)}
+          />
         </SheetContent>
       </Sheet>
     </div>

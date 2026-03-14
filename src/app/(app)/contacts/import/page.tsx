@@ -54,10 +54,10 @@ export default function ContactsImportPage() {
   }
 
   return (
-    <div className="min-h-full bg-gray-50">
-      <div className="bg-white border-b sticky top-0 z-20">
+    <div className="min-h-full bg-muted/30">
+      <div className="bg-card border-b sticky top-0 z-20">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 py-3 flex items-center gap-3">
-          <button onClick={() => router.back()} className="text-muted-foreground hover:text-gray-900">
+          <button onClick={() => router.back()} className="text-muted-foreground hover:text-foreground">
             <ArrowLeft className="w-5 h-5" />
           </button>
           <h1 className="font-bold text-lg">Import Contacts</h1>
@@ -80,8 +80,8 @@ export default function ContactsImportPage() {
 
         {/* Drop zone */}
         <div
-          className={`bg-white border-2 border-dashed rounded-xl p-10 text-center transition-colors ${
-            dragOver ? "border-[#00C9A7] bg-teal-50" : "border-gray-200"
+          className={`bg-card border-2 border-dashed rounded-xl p-10 text-center transition-colors ${
+            dragOver ? "border-accent bg-accent/5" : "border-border"
           }`}
           onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
           onDragLeave={() => setDragOver(false)}
@@ -94,7 +94,7 @@ export default function ContactsImportPage() {
         >
           {file ? (
             <div className="space-y-2">
-              <FileText className="w-10 h-10 mx-auto text-[#00C9A7]" />
+              <FileText className="w-10 h-10 mx-auto text-accent" />
               <p className="font-medium text-sm">{file.name}</p>
               <p className="text-xs text-muted-foreground">
                 {(file.size / 1024).toFixed(1)} KB
@@ -109,11 +109,11 @@ export default function ContactsImportPage() {
             </div>
           ) : (
             <div className="space-y-3">
-              <Upload className="w-10 h-10 mx-auto text-gray-300" />
+              <Upload className="w-10 h-10 mx-auto text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
                 Drag & drop your CSV here, or{" "}
                 <button
-                  className="text-[#00C9A7] hover:underline font-medium"
+                  className="text-accent hover:underline font-medium"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   browse
@@ -147,7 +147,7 @@ export default function ContactsImportPage() {
         {/* Actions */}
         <div className="flex gap-3">
           <Button
-            className="flex-1 bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+            className="flex-1 bg-primary hover:bg-primary/80 text-primary-foreground"
             onClick={handleUpload}
             disabled={!file || uploading}
           >

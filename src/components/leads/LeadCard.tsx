@@ -68,7 +68,7 @@ export function LeadCard({ lead, onStatusChange }: LeadCardProps) {
     >
       {/* Swipe action buttons (mobile) */}
       <div
-        className="absolute right-0 top-0 bottom-0 flex items-center gap-1 px-2 bg-gray-100"
+        className="absolute right-0 top-0 bottom-0 flex items-center gap-1 px-2 bg-muted"
         style={{ width: 120 }}
       >
         <button
@@ -84,7 +84,7 @@ export function LeadCard({ lead, onStatusChange }: LeadCardProps) {
           <Mail className="w-4 h-4" />
         </button>
         <button
-          className="flex flex-col items-center gap-0.5 w-10 h-10 rounded-lg bg-[#00C9A7] text-white justify-center"
+          className="flex flex-col items-center gap-0.5 w-10 h-10 rounded-lg bg-accent text-white justify-center"
           onClick={() => { setSwipeX(0); }}
         >
           <RefreshCw className="w-3.5 h-3.5" />
@@ -94,7 +94,7 @@ export function LeadCard({ lead, onStatusChange }: LeadCardProps) {
       {/* Card */}
       <div
         className={cn(
-          "bg-white border rounded-xl p-3 cursor-pointer hover:shadow-md transition-all select-none border-l-4",
+          "bg-card border rounded-xl p-3 cursor-pointer hover:shadow-md transition-all select-none border-l-4",
           priority?.borderColor ?? "border-l-gray-200"
         )}
         style={{
@@ -107,7 +107,7 @@ export function LeadCard({ lead, onStatusChange }: LeadCardProps) {
       >
         {/* Drag handle */}
         <div
-          className="absolute top-2 right-2 text-gray-300 cursor-grab active:cursor-grabbing touch-none"
+          className="absolute top-2 right-2 text-muted-foreground/40 cursor-grab active:cursor-grabbing touch-none"
           {...attributes}
           {...listeners}
         >
@@ -117,10 +117,10 @@ export function LeadCard({ lead, onStatusChange }: LeadCardProps) {
         <Link href={`/leads/${lead.id}`} className="block">
           {/* Title + value */}
           <div className="pr-6">
-            <p className="font-semibold text-sm text-gray-900 leading-tight line-clamp-2">
+            <p className="font-semibold text-sm text-foreground leading-tight line-clamp-2">
               {lead.title}
             </p>
-            <p className="text-base font-bold text-[#0F1E3C] mt-1">
+            <p className="text-base font-bold text-primary mt-1">
               {formatCurrency(lead.value, lead.currency)}
             </p>
           </div>
@@ -142,7 +142,7 @@ export function LeadCard({ lead, onStatusChange }: LeadCardProps) {
 
             {lead.profiles && (
               <Avatar className="w-5 h-5 flex-shrink-0">
-                <AvatarFallback className="text-[9px] bg-[#0F1E3C] text-white">
+                <AvatarFallback className="text-[9px] bg-primary text-primary-foreground">
                   {getInitials(lead.profiles.name)}
                 </AvatarFallback>
               </Avatar>

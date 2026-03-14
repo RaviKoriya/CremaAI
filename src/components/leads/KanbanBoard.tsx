@@ -11,6 +11,7 @@ import {
   type DragStartEvent,
 } from "@dnd-kit/core";
 import { useState } from "react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { toast } from "sonner";
 import { KanbanColumn } from "./KanbanColumn";
 import { LeadCard } from "./LeadCard";
@@ -30,6 +31,8 @@ export function KanbanBoard({ initialLeads, companyId }: KanbanBoardProps) {
     companyId
   );
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [activePipelineOpen, setActivePipelineOpen] = useState(true);
+  const [closingOpen, setClosingOpen] = useState(true);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -112,24 +115,95 @@ export function KanbanBoard({ initialLeads, companyId }: KanbanBoardProps) {
     {} as Record<string, LeadWithContact[]>
   );
 
+  const activeStages = LEAD_STATUSES.filter((s) =>
+    ["New", "Contacted", "Qualified", "Proposal Sent"].includes(s.value)
+  );
+  const closingStages = LEAD_STATUSES.filter((s) =>
+    ["Negotiation", "Won", "Lost"].includes(s.value)
+  );
+
   return (
     <DndContext
       sensors={sensors}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      {/* Horizontal scroll container — snaps on mobile */}
-      <div className="flex gap-4 overflow-x-auto pb-4 kanban-mobile-scroll px-4 sm:px-0 snap-x snap-mandatory">
-        {LEAD_STATUSES.map((status) => (
-          <KanbanColumn
-            key={status.value}
-            status={status.value}
-            label={status.label}
-            color={status.dotColor.replace("bg-", "#").replace("-500", "")}
-            leads={leadsByStatus[status.value] ?? []}
-            onStatusChange={handleStatusChange}
-          />
-        ))}
+      <div className="space-y-3 px-4 sm:px-0">
+        {/* Row 1: Active pipeline */}
+        <div className="rounded-xl border bg-card overflow-hidden">
+          <button
+            onClick={() => setActivePipelineOpen((v) => !v)}
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted/40 transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              {activePipelineOpen ? (
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              ) : (
+                <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              )}
+              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
+                Active Pipeline
+              </span>
+              <span className="text-xs bg-muted text-muted-foreground rounded-full px-1.5 py-0.5 font-medium">
+                {activeStages.reduce((n, s) => n + (leadsByStatus[s.value]?.length ?? 0), 0)}
+              </span>
+            </div>
+          </button>
+          {activePipelineOpen && (
+            <div className="px-4 pb-4 pt-1">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {activeStages.map((status) => (
+                  <KanbanColumn
+                    key={status.value}
+                    status={status.value}
+                    label={status.label}
+                    color={status.dotColor.replace("bg-", "#").replace("-500", "")}
+                    leads={leadsByStatus[status.value] ?? []}
+                    onStatusChange={handleStatusChange}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Row 2: Closing stages */}
+        <div className="rounded-xl border bg-card overflow-hidden">
+          <button
+            onClick={() => setClosingOpen((v) => !v)}
+            className="w-full flex items-center justify-between px-4 py-3 hover:bg-muted/40 transition-colors"
+          >
+            <div className="flex items-center gap-2">
+              {closingOpen ? (
+                <ChevronDown className="w-4 h-4 text-muted-foreground" />
+              ) : (
+                <ChevronRight className="w-4 h-4 text-muted-foreground" />
+              )}
+              <span className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wider">
+                Closing
+              </span>
+              <span className="text-xs bg-muted text-muted-foreground rounded-full px-1.5 py-0.5 font-medium">
+                {closingStages.reduce((n, s) => n + (leadsByStatus[s.value]?.length ?? 0), 0)}
+              </span>
+            </div>
+          </button>
+          {closingOpen && (
+            <div className="px-4 pb-4 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {closingStages.map((status) => (
+                  <KanbanColumn
+                    key={status.value}
+                    status={status.value}
+                    label={status.label}
+                    color={status.dotColor.replace("bg-", "#").replace("-500", "")}
+                    leads={leadsByStatus[status.value] ?? []}
+                    onStatusChange={handleStatusChange}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <DragOverlay>

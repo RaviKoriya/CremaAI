@@ -58,7 +58,7 @@ export default function LoginPage() {
               <Label htmlFor="password">Password</Label>
               <Link
                 href="/forgot-password"
-                className="text-sm text-[#00C9A7] hover:underline"
+                className="text-sm text-accent hover:underline"
               >
                 Forgot password?
               </Link>
@@ -82,7 +82,7 @@ export default function LoginPage() {
 
           <Button
             type="submit"
-            className="w-full h-11 bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+            className="w-full h-11 bg-primary hover:bg-primary/80 text-primary-foreground"
             disabled={loading}
           >
             {loading ? "Signing in..." : "Sign in"}
@@ -91,7 +91,7 @@ export default function LoginPage() {
 
         <div className="mt-4 text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
-          <Link href="/signup" className="text-[#00C9A7] hover:underline font-medium">
+          <Link href="/signup" className="text-accent hover:underline font-medium">
             Create one free
           </Link>
         </div>

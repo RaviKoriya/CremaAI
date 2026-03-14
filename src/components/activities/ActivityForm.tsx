@@ -79,7 +79,7 @@ export function ActivityForm({ companyId, leadId, contactId, onSuccess, onCancel
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 p-4 bg-gray-50 rounded-xl">
+    <form onSubmit={handleSubmit} className="space-y-3 p-4 bg-muted/50 rounded-xl">
       <div className="flex items-center gap-2">
         {ACTIVITY_TYPES.map((t) => {
           const Icon = ICONS[t.value as keyof typeof ICONS];
@@ -90,8 +90,8 @@ export function ActivityForm({ companyId, leadId, contactId, onSuccess, onCancel
               onClick={() => { setType(t.value); setIsTask(t.value === "Task"); }}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors touch-target ${
                 type === t.value
-                  ? "bg-[#0F1E3C] text-white"
-                  : "bg-white border text-muted-foreground hover:bg-gray-100"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card border text-muted-foreground hover:bg-muted"
               }`}
             >
               <Icon className="w-3.5 h-3.5" />
@@ -112,7 +112,7 @@ export function ActivityForm({ companyId, leadId, contactId, onSuccess, onCancel
           : "Notes..."
         }
         rows={3}
-        className="resize-none bg-white"
+        className="resize-none bg-card"
         required
       />
 
@@ -123,7 +123,7 @@ export function ActivityForm({ companyId, leadId, contactId, onSuccess, onCancel
             type="datetime-local"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="h-9 bg-white"
+            className="h-9 bg-card"
           />
         </div>
       )}
@@ -132,7 +132,7 @@ export function ActivityForm({ companyId, leadId, contactId, onSuccess, onCancel
         <Button
           type="submit"
           size="sm"
-          className="bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+          className="bg-primary hover:bg-primary/80 text-primary-foreground"
           disabled={loading || !description.trim()}
         >
           {loading ? "Saving..." : "Log Activity"}

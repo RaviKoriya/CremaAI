@@ -59,11 +59,11 @@ export default function OnboardingCompanyPage() {
     <div className="space-y-6">
       {/* Step indicator */}
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-[#0F1E3C] text-white flex items-center justify-center font-bold">
+        <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
           1
         </div>
         <div>
-          <h2 className="font-bold text-xl text-gray-900">Set up your company</h2>
+          <h2 className="font-bold text-xl text-foreground">Set up your company</h2>
           <p className="text-sm text-muted-foreground">Takes about 60 seconds</p>
         </div>
       </div>
@@ -71,7 +71,7 @@ export default function OnboardingCompanyPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <Building2 className="w-5 h-5 text-[#00C9A7]" />
+            <Building2 className="w-5 h-5 text-accent" />
             Company Details
           </CardTitle>
           <CardDescription>
@@ -147,7 +147,7 @@ export default function OnboardingCompanyPage() {
             <div className="pt-2 space-y-3">
               <Button
                 type="submit"
-                className="w-full h-11 bg-[#0F1E3C] hover:bg-[#1a2f5e] text-white"
+                className="w-full h-11 bg-primary hover:bg-primary/80 text-primary-foreground"
                 disabled={loading || loadingDemo || !form.name}
               >
                 {loading ? "Saving..." : "Continue →"}
@@ -156,7 +156,7 @@ export default function OnboardingCompanyPage() {
               <Button
                 type="button"
                 variant="outline"
-                className="w-full h-11 border-[#00C9A7] text-[#00C9A7] hover:bg-[#00C9A7] hover:text-white"
+                className="w-full h-11 border-accent text-accent hover:bg-accent hover:text-white"
                 disabled={loading || loadingDemo || !form.name}
                 onClick={(e) => handleSubmit(e as React.FormEvent, true)}
               >
