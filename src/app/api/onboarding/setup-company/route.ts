@@ -52,11 +52,18 @@ export async function POST(request: NextRequest) {
     companyId = newCompany?.id ?? null;
 
     // Link profile to company and set role to Admin
+    // Use upsert (not update) so it works even if the trigger-created
+    // profile row doesn't exist yet in production.
     if (companyId) {
       const { error: profileError } = await service
         .from("profiles")
-        .update({ company_id: companyId, role: "Admin" })
-        .eq("id", user.id);
+        .upsert({
+          id: user.id,
+          email: user.email ?? "",
+          name: (user.user_metadata?.full_name as string) || (user.email?.split("@")[0] ?? "User"),
+          company_id: companyId,
+          role: "Admin",
+        });
 
       if (profileError) {
         return NextResponse.json({ error: profileError.message }, { status: 500 });

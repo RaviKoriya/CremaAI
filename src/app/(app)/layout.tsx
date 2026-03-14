@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { AppShell } from "@/components/layout/AppShell";
 import { AriaButton } from "@/components/ai/AriaButton";
 
@@ -21,8 +21,10 @@ export default async function AppLayout({
     redirect("/login");
   }
 
-  // Fetch profile + company currency in one query
-  const { data: profile } = await supabase
+  // Use service client to bypass RLS — safe because this is a server component
+  // and we've already verified the user's identity above.
+  const service = await createServiceClient();
+  const { data: profile } = await service
     .from("profiles")
     .select("*, companies(currency)")
     .eq("id", user.id)
